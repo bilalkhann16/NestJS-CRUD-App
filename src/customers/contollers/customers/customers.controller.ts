@@ -35,8 +35,7 @@ export class CustomersController {
 
     @Post('create')
     createcustomer(@Body() dto:CreateCustomerDto){
-        // this.customersService.createCustomer(createCustomerDtos);
+        this.customersService.createCustomer(dto);
         // res.send(createCustomerDtos);
     }
-    
 }

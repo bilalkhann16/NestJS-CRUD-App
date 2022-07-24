@@ -29,7 +29,6 @@ export class CustomersService {
     }
 
     createCustomer(customerDto:CreateCustomerDto){
-        // console.log(customerDto);
         this.customers.push(customerDto);
     }
     getCustomers(){
