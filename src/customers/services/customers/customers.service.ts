@@ -1,26 +1,38 @@
 import { Injectable } from '@nestjs/common';
+import { Customer } from 'src/customers/types/Customer';
+import { CreateCustomerDto } from 'src/customers/dtos/CreateCustomer.dto';
+// import { CreateCustomerDto } from '../../dtos/CreateCustomer.dto';
+// import { Customer } from 'src/customers/types/Customer';
 
 @Injectable()
 export class CustomersService {
-   users = [
+   private customers:Customer[]  = [
     {
         id: 1,
         email: 'danny@gmail.com',
-        createdAt: new Date(),
+        name: 'Danny'
     },
     {
         id: 2,
         email: 'bilal@gmail.com',
-        createdAt: new Date(),
+        name: 'Bilal'
     },
     {
         id: 3,
         email: 'ahsan@gmail.com',
-        createdAt: new Date(),
+        name: 'Ahsan'
     }
    ]
     
     findCustomerById(id:number){
-        return this.users.find(user => user.id === id);
+        return this.customers.find(user => user.id === id);
+    }
+
+    createCustomer(customerDto:CreateCustomerDto){
+        // console.log(customerDto);
+        this.customers.push(customerDto);
+    }
+    getCustomers(){
+        return this.customers;
     }
 }

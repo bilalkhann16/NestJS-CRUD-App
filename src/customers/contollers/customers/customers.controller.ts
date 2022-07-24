@@ -1,6 +1,8 @@
-import { Controller, Get, Param, ParseIntPipe, Req, Res } from '@nestjs/common';
-import express, { Request, Response } from "express";
+import { Body, Controller, Get, Param, ParseIntPipe, Post, Req, Res } from '@nestjs/common';
+import { Request, Response } from "express";
 import { CustomersService } from 'src/customers/services/customers/customers.service';
+import { CreateCustomerDto } from 'src/customers/dtos/CreateCustomer.dto';
+// import { CreateCustomerDto } from '../../dtos/CreateCustomer.dto';
 
 @Controller('customers')
 export class CustomersController {
@@ -11,10 +13,30 @@ export class CustomersController {
     @Res() res:Response){
         const customer =  this.customersService.findCustomerById(id);
         if (customer){
-            res.send(customer);
+            console.log(customer);
+            res.send (customer);
         } else{
             res.status(400).send('Customer not found');
         }
+    }
+    // @Get('/search/:id')
+    // searchCustomerById(@Param('id', ParseIntPipe)id:number){
 
-    } 
+    @Get('')
+    getAllCustomers(){
+        return this.customersService.getCustomers();
+    }
+
+    //easy way to get the request object is @Req() req:Request but we can also use the DTOs to get the request object
+    // @Post('create')
+    // createCustomer(@Body() createCustomerDtos:CreateCustomerDto){
+    //     // this.customersService.createCustomer(createCustomerDto);
+    // }
+
+    @Post('create')
+    createcustomer(@Body() dto:CreateCustomerDto){
+        // this.customersService.createCustomer(createCustomerDtos);
+        // res.send(createCustomerDtos);
+    }
+    
 }
