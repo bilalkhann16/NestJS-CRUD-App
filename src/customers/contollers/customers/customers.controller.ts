@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post, Req, Res } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Post, Req, Res, UsePipes, ValidationPipe } from '@nestjs/common';
 import { Request, Response } from "express";
 import { CustomersService } from 'src/customers/services/customers/customers.service';
 import { CreateCustomerDto } from 'src/customers/dtos/CreateCustomer.dto';
@@ -34,6 +34,7 @@ export class CustomersController {
     // }
 
     @Post('create')
+     @UsePipes(ValidationPipe)
     createcustomer(@Body() dto:CreateCustomerDto){
         this.customersService.createCustomer(dto);
         // res.send(createCustomerDtos);
