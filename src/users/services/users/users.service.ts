@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { User } from 'src/users/types/Users';
+import { Serializeduser, User } from 'src/users/types';
+import { plainToClass } from 'class-transformer';
 
 @Injectable()
 export class UsersService {
@@ -18,9 +19,9 @@ export class UsersService {
         },
     ];
     getUsers(){
-        return this.users;
+        return this.users.map((user) => plainToClass(Serializeduser, user));
     }
-    getUsersByUsername(username: string){
-        return this.users.find(user) => user.username === username);
-    }
+    // getUsersByUsername(username: string){
+    //     return this.users.find(user) => user.username === username);
+    // }
 }
