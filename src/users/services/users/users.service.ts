@@ -21,7 +21,7 @@ export class UsersService {
     getUsers(){
         return this.users.map((user) => plainToClass(Serializeduser, user));
     }
-    // getUsersByUsername(username: string){
-    //     return this.users.find(user) => user.username === username);
-    // }
+    getUsersByUsername(username: string){
+        return this.users.find((user) => user.username === username);
+    }
 }
