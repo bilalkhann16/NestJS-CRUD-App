@@ -2,7 +2,6 @@ import { Body, Controller, Get, Param, ParseIntPipe, Post, Req, Res, UsePipes, V
 import { Request, Response } from "express";
 import { CustomersService } from 'src/customers/services/customers/customers.service';
 import { CreateCustomerDto } from 'src/customers/dtos/CreateCustomer.dto';
-// import { CreateCustomerDto } from '../../dtos/CreateCustomer.dto';
 
 @Controller('customers')
 export class CustomersController {
@@ -13,7 +12,7 @@ export class CustomersController {
     @Res() res:Response){
         const customer =  this.customersService.findCustomerById(id);
         if (customer){
-            console.log(customer);
+            console.log('customer',customer);
             res.send (customer);
         } else{
             res.status(400).send('Customer not found');
