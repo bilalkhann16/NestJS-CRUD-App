@@ -6,6 +6,7 @@ import { Serializeduser } from 'src/users/types';
 export class UsersController {
     constructor(@Inject('USER_SERVICE') private readonly userService: UsersService ){}
     
+    @UseInterceptors(ClassSerializerInterceptor)
     @Get('')
     getUsers(){
         return this.userService.getUsers();
