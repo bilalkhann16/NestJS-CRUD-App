@@ -1,5 +1,6 @@
 import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
 import { CustomersController } from './contollers/customers/customers.controller';
+import { ValidateCustomerAccountMiddleware } from './middlewares/validate-customer-acc.middleware';
 import { ValidateCustomerMiddleware } from './middlewares/validate-customer-middleware';
 import { CustomersService } from './services/customers/customers.service';
 
@@ -9,9 +10,17 @@ import { CustomersService } from './services/customers/customers.service';
 })
 export class CustomersModule implements NestModule{
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(ValidateCustomerMiddleware).forRoutes({
-      path: 'customers/search/:id',
-      method: RequestMethod.GET,
-    });
+    consumer.apply(ValidateCustomerMiddleware, ValidateCustomerAccountMiddleware)
+    .exclude(
+      {
+        path: 'api/customers/create',
+        method: RequestMethod.POST
+      },
+      {
+        path: 'api/customers',
+        method: RequestMethod.GET
+      },
+    )
+    .forRoutes(CustomersController);
   }
 }
